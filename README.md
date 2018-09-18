@@ -5,6 +5,35 @@
 ## 1. Khai báo biến với var, let, và const 
   Khi khai báo biến với Const, biến đó sẽ là immutable variable, nghĩa là sẽ không thay đổi được giá trị của biến. Với var và     let, chúng ta đều có thể khai báo được 1 biến bất kỳ, biến này có thể thay đổi được giá trị.
   
+#### ví dụ minh họa:
+  
+  
+    // var cho phép chúng ta khai báo lại 1 biến cũ, nhưng let thì không
+    var n = 1;
+    var n = 2; // no syntax error
+
+    let m = 1;
+    let m = 2; // syntax error
+
+    // var và let đều tác động vào function block như nhau, tuy nhiên ở trường hợp này let sẽ chỉ tác động vào block ngay sau nó:
+
+    function someFunc() {
+    
+    for( let i = 0; i <= 9; i++ ) {
+        // Biến i lúc này chỉ tồn tại trong scope block của for
+    }
+
+    // Gọi biến i ngoài này sẽ bị lỗi
+    }
+
+    function someFunc() {
+    
+    for( var i = 0; i <= 9; i++ ) {
+        // Biến i lúc này không chỉ tồn tại trong scope block của for
+    }
+
+    // mà còn tồn tại cả ở ngoài này nữa, lúc này biến i = 10
+  
 ## 2. Arrow function
   Basic syntax của Arrow function:
   - (param1, param2, …, paramN) => { statements }
