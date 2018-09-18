@@ -96,3 +96,77 @@
     let p2 = { ...p1, z: 1}; // { x: 0, y: 1, z: 1 }
     let p3 = { ...p2, y : 2 } // { x: 0, y: 2, z: 1 }, update y nếu y đã có.
     let p4 = { y : 3, ...p3 } // { y : 2, x: 0, z: 1}, không update y vì nguyên tắc phía sau override phía trước
+    
+## 7. Classes
+   Class rất quan trọng trong RN, đây là kỹ thuật chính chúng ta sử dụng để xây dựng các Component. Phần này có liên quan tới OOP khá nhìu nên mình chỉ nói các kỹ thuật chính.
+   
+#### ví dụ minh họa:
+
+      class SomeObject {}
+      let obj = new SomeObject(); // tạo biến obj là đối tượng của SomeObject
+
+    // Các biến và hàm trong class không cần khai báo với từ khoá var/let/constant/function
+
+    class Pet {
+    
+    // biến trong class
+    food = `something eatable`; 
+
+    // Hàm (method) trong class
+    eat() {
+        console.log('I can eat ${ this.food }'); 
+    }
+    
+    // Hàm khởi tạo (constructor) cho class Pet
+    constructor(name, age) {
+        this.name = name;
+        this.age  = age;
+    }
+}
+
+    let myPet = new Pet('Beo', 2);
+    console.log(myPet); // object { food: 'something eatable', name: 'Beo', age: 1 }
+    myPet.eat(); // I can eat something eatable
+
+
+    // Khai báo class Cat kế thừa từ class Pet
+    class Cat extends Pet {
+
+    static numberOfLegs = 4; // biến static trong class
+  
+    // Hàm static trong class
+    static lazy() { 
+        console.log(`All cats are lazy`);
+    }
+
+    constructor(name, age) {
+        super(name, age); // gọi lên hàm dựng của parent class: Pet
+        this.food = `fishes`;
+    }
+    }
+
+    let myCat = new Cat();
+    myCat.eat(); // I can eat fishes. Hàm eat được kế thừa từ class cha (Pet)
+    console.log(Cat.numberOfLegs); // 4
+    Cat.lazy(); // All cats are lazy
+ 
+## 8. Promises
+  xem ở link sau: https://github.com/thanhcong051593/promise/blob/master/README.md
+## 9. Async/await
+   Thế giới của JS đầy rẫy những callback function và promise, thế nhưng lắm lúc ta lại cần chúng chạy synchonize bình thường, hay nói đúng hơn ta sẵn sàng đợi cho chúng chạy xong. Source code sẽ chạy lần lượt từ trên xuống dưới.
+
+#### ví dụ minh họa:
+
+    async function doTask() { // có thể dùng `aync () => {` để thay thế
+    let result = await doSomething(100, 3000);
+    console.log(result); // print 100 after 3s
+
+    let nextResult = await doSomething(20, 2500);
+    console.log(nextResult) // print 20 after 5.5s
+    }
+
+    doTask();
+    console.log(`Run here first`); // dòng này in trước khi doTask() chạy
+    
+  Ở đây ta cần lưu ý: Từ khoá wait chỉ chạy trong function được khai báo với từ khoá async. Vì function này async nên sẽ       chạy bất đồng bộ nên ở trên ta thấy Run here first sẽ được in ra đầu tiên. Trong function doTask, từ khoá await sẽ khiến     doSomething chạy như synchronize.
+
