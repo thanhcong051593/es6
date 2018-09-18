@@ -8,7 +8,8 @@
   (param1, param2, …, paramN) => expression
   // equivalent to: (param1, param2, …, paramN) => { return expression; }
   Arrow function cũng như function bình thường, chỉ khác về syntax và binding context:
-  ví dụ minh họa:
+  
+#### ví dụ minh họa:
   
     function Pet() {
     this.age = 1;
